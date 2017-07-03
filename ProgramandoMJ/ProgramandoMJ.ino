@@ -29,7 +29,7 @@
 
 void setup() {
   
- Serial.begin(115200);
+ Serial.begin(9600);
 
   // SETUP DE TUDO
   ligarMotores(); // ligar motores
@@ -42,9 +42,9 @@ void setup() {
   
   for (int i = 0; i < 100; i++)  // make the calibration take about 10 seconds
   {
-    LED3.turnOn();
+    LED1.turnOn();
     qtra.calibrate();       // reads all sensors 10 times at 2500 us per read (i.e. ~25 ms per call)
-    LED3.turnOff();
+    LED1.turnOff();
     delay(10);
   }
   
@@ -59,24 +59,44 @@ void setup() {
   
 }
 
-
+int tchela=0;
 void loop() {
        
-  //qtra.read(sensorValues);
-  
+    //qtra.read(sensorValues);
+
+  //Serial.println(lerTodosQTR());  
   //lerTodosSensores();
-  //Serial.println(lerSharp(1));
+  //Serial.println(lerQTR(8));
   //Serial.println(lerQTRVerde(3));
-  //PID(KP, KI, KD, 35, 3500);
+  /*lerTodosSensores();
+  if(lerQTR(8) < 800) {
+    tchela++;
+      if(tchela > 10) {
+        while(1) {
+          lerTodosSensores();
+       Buzzer.turnOn();
+        pararMotores();
+      }
+    }
+  } 
+  
+  else {*/
+    qtra.read(sensorValues);
+    if(lerTodosQTR() > 1800 && lerTodosQTR() < 3000) {
+      mover(255, 255);
+    } else {
+      PID(KP, KI, KD, 255, 2500);
+    }
+  //}
   //mover(70, 70);
 
 
-  if(Botao1.readValue() == HIGH) {
-      LED2.turnOn();
-      delay(1000);
-      Seguidor(true);
-      LED2.turnOff();
-  }
+//  if(Botao1.readValue() == HIGH) {
+      //LED2.turnOn();
+      //delay(1000);
+      //Seguidor(true);
+      //LED2.turnOff();
+  //}
   
 
 }

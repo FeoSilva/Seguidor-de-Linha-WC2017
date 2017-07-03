@@ -7,7 +7,7 @@
 */
 
 int lerTodosQTR() {
-  unsigned int position = qtra.readLine(sensorValues);
+  unsigned int position = qtra.readLine(sensorValues, QTR_EMITTERS_ON, 1);
   return position;
 }
 
@@ -34,6 +34,7 @@ void lerTodosSensores() {
   allsensors += lerQTR(5);
   allsensors += " ";
   allsensors += lerQTR(6);
+  allsensors += "   ---- ";
   allsensors += lerTodosQTR();
   allsensors += "    -------------  ";
   allsensors += analogRead(A0);
@@ -51,5 +52,5 @@ void lerTodosSensores() {
   Serial.println(allsensors);   
   Serial.println();
   //delay(250);
-}
+} 
 

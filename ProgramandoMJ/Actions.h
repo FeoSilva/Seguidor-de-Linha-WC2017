@@ -72,18 +72,19 @@ void AlertaDeInicio() {
 
 void PID (double kP, double kI, double kD, double tP, int media) {
 
-  erro = lerTodosQTR() - media;
+    
+  int erro = lerTodosQTR() - media;
   
-  P = kP * erro;
-  I = I + (erro * kI);
-  D = kD * (erro - lastError);
+  int P = kP * erro;
+  int I = I + (erro * kI);
+  int D = kD * (erro - lastError);
 
-  ganho = P + I + D;
+  int ganho = P + I + D;
 
   lastError = erro;
 
-  motorB = tP + ganho;
-  motorC = tP - ganho;
+  double motorB = tP + ganho;
+  double motorC = tP - ganho;
 
   mover(motorB, motorC);
   
