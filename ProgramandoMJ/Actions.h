@@ -67,26 +67,39 @@ void AlertaDeInicio() {
   LED2.turnOff();
   LED3.turnOff();
 }
+int erro; int P; int I; int D;
 
+int ganho;
 
+double motorB; double motorC;
+int pass = 0;
 
 void PID (double kP, double kI, double kD, double tP, int media) {
 
     
-  int erro = lerTodosQTR() - media;
+  erro = lerTodosQTR() - media;
   
-  int P = kP * erro;
-  int I = I + (erro * kI);
-  int D = kD * (erro - lastError);
+  P = kP * erro;
+  I = I + (erro * kI);
+  D = kD * (erro - lastError);
 
-  int ganho = P + I + D;
+  ganho = P + I + D;
 
   lastError = erro;
 
-  double motorB = tP + ganho;
-  double motorC = tP - ganho;
-
-  mover(motorB, motorC);
-  
+  motorB = tP + ganho;
+  motorC = tP - ganho;
+ /*if(lerQTR(7) < 750) {
+    pass++;
+    LED1.turnOn();
+    while(pass == 10) {
+    mover(0,0);
+    }
+  } else {
+   */ 
+   
+   //LED1.turnOff();
+    mover(motorB, motorC);
+  //}
 };
 

@@ -50,53 +50,31 @@ void setup() {
   
   LED3.turnOff();
   Serial.println("Calibration Done!");
-
+pinMode(2, INPUT);
+pinMode(3, INPUT);
   
   // Mostrar 'Inicializando...'
   Serial.println("Inicializando...");
   delay(800);
- 
   
 }
 
-int tchela=0;
 void loop() {
-       
-    //qtra.read(sensorValues);
-
-  //Serial.println(lerTodosQTR());  
-  //lerTodosSensores();
-  //Serial.println(lerQTR(8));
-  //Serial.println(lerQTRVerde(3));
-  /*lerTodosSensores();
-  if(lerQTR(8) < 800) {
-    tchela++;
-      if(tchela > 10) {
-        while(1) {
-          lerTodosSensores();
-       Buzzer.turnOn();
-        pararMotores();
-      }
-    }
-  } 
   
-  else {*/
-    qtra.read(sensorValues);
+   //qtra.read(sensorValues);
+
+   //Serial.println(lerTodosQTR());
+  
+    //lerTodosSensores();
+
     if(lerTodosQTR() > 1800 && lerTodosQTR() < 3000) {
       mover(255, 255);
     } else {
       PID(KP, KI, KD, 255, 2500);
     }
-  //}
-  //mover(70, 70);
+
+   //mover(70, 70);
 
 
-//  if(Botao1.readValue() == HIGH) {
-      //LED2.turnOn();
-      //delay(1000);
-      //Seguidor(true);
-      //LED2.turnOff();
-  //}
-  
 
 }

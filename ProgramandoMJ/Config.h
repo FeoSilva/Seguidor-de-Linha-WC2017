@@ -9,8 +9,8 @@
 // Utilizamos 4 motores porém eles estão em paralelo
 
 // Motor ESQUERDO DIANETEIRO
-#define MotorEsquerdoFrente 10
-#define MotorEsquerdoTras 11
+#define MotorEsquerdoFrente 11
+#define MotorEsquerdoTras 10
 
 // Motor DIREITO DIANTEIRO
 #define MotorDireitoFrente 5
@@ -34,10 +34,10 @@ void ligarMotores() {
 // PORTAS ANÁLOGICAS
 
 // SENSORES ARRAY QTR-8-A
-#define luminosidade1     A5 // SENSOR LINHA 1
-#define luminosidade2     A4 // SENSOR LINHA 2
-#define luminosidade3     A3 // SENSOR LINHA 3
-#define luminosidade4     A2 // SENSOR LINHA 4
+#define luminosidade1     A4 // SENSOR LINHA 1
+#define luminosidade2     A5 // SENSOR LINHA 2
+#define luminosidade3     A2// SENSOR LINHA 3
+#define luminosidade4     A3 // SENSOR LINHA 4
 #define luminosidade5     A1 // SENSOR LINHA 5
 #define luminosidade6     A0 // SENSOR LINHA 6
 
@@ -60,11 +60,11 @@ int QTR[] = {
 // SETTINGS PARA LER O ARRAY COM A FUNÇÃO .readLine()
 #define NUM_SENSORS             6  // number of sensors used
 #define NUM_SAMPLES_PER_SENSOR  4  // average 4 analog samples per sensor reading
-#define EMITTER_PIN             2  // emitter is controlled by digital pin 2
+//#define EMITTER_PIN             2  // emitter is controlled by digital pin 2
 
 // Sensores de 0 a 8 que estão conectados nas portas analógicas
 QTRSensorsAnalog qtra((unsigned char[]) {luminosidade1, luminosidade2, luminosidade3, luminosidade4, luminosidade5, luminosidade6}, 
-  NUM_SENSORS, NUM_SAMPLES_PER_SENSOR, EMITTER_PIN);
+  NUM_SENSORS, NUM_SAMPLES_PER_SENSOR/*, EMITTER_PIN*/);
 unsigned int sensorValues[NUM_SENSORS];
 
  
@@ -105,6 +105,7 @@ DigitalOut LED1(led1);
 DigitalOut LED2(led2);
 DigitalOut LED3(led3);
 
+
 // Buzzer para fazer barulinho
 #define buzzer 12
 DigitalOut Buzzer(buzzer);
@@ -124,16 +125,20 @@ int lastError = 0;
 
 
 //float KP = 0.015;
-float KP = 0.2; // Constante do Proporcional
+//float KP = 0.3; // Constante do Proporcional // tchela
 //float KI = 0.03;
-float KI = 0.03;
+//float KI = 0.001;  //  tchela
 //float KD = 0.4; // Constante da Derivada
-float KD = 0.1; // Constante da Derivada
+//float KD = 0.2; // Constante da Derivada // tchela
+
+float KP = 0.15;
+float KI = 0.000;
+float KD = 0.3;
 
 int branco = 100; // Força normal para seguir linha
 int preto = 700; // Força para rampa
 
-int forcaPID = 65;
+int forcaPID = 25;
 
 int offset = ((branco + preto) / 2); // media seguidor
 
