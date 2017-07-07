@@ -123,7 +123,6 @@ DigitalOut Buzzer(buzzer);
 unsigned long tempoinicial = millis();
 int lastError = 0;
 
-
 //float KP = 0.015;
 //float KP = 0.3; // Constante do Proporcional // tchela
 //float KI = 0.03;
@@ -131,9 +130,9 @@ int lastError = 0;
 //float KD = 0.4; // Constante da Derivada
 //float KD = 0.2; // Constante da Derivada // tchela
 
-float KP = 0.15;
-float KI = 0.000;
-float KD = 0.3;
+float KP = 0.32;
+float KI = 0;
+float KD = 0.4;
 
 int branco = 100; // Força normal para seguir linha
 int preto = 700; // Força para rampa

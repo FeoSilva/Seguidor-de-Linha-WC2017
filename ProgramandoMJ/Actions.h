@@ -81,6 +81,7 @@ void PID (double kP, double kI, double kD, double tP, int media) {
   
   P = kP * erro;
   I = I + (erro * kI);
+//  I = 0;
   D = kD * (erro - lastError);
 
   ganho = P + I + D;

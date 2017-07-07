@@ -25,7 +25,7 @@
 #include "Verifications.h" // verifica
 #include "Actions.h" // age
 #include "Controllers.h" // controla
-
+ unsigned long int comeco = 0;
 
 void setup() {
   
@@ -50,15 +50,17 @@ void setup() {
   
   LED3.turnOff();
   Serial.println("Calibration Done!");
-pinMode(2, INPUT);
-pinMode(3, INPUT);
+/*pinMode(2, INPUT);
+pinMode(3, INPUT);*/
   
   // Mostrar 'Inicializando...'
   Serial.println("Inicializando...");
   delay(800);
+  comeco = millis();
+  Serial.println(comeco);
   
 }
-
+unsigned long int tempobom = 0;
 void loop() {
   
    //qtra.read(sensorValues);
@@ -66,11 +68,16 @@ void loop() {
    //Serial.println(lerTodosQTR());
   
     //lerTodosSensores();
-
+    tempobom = millis() - comeco;
+   while(tempobom > 20000) {
+    LED1.turnOn();
+    Serial.println(tempobom);
+    pararMotores();
+   }
     if(lerTodosQTR() > 1800 && lerTodosQTR() < 3000) {
       mover(255, 255);
     } else {
-      PID(KP, KI, KD, 255, 2500);
+      PID(KP, KI, KD, 300, 2500);
     }
 
    //mover(70, 70);
