@@ -5,16 +5,15 @@
 */
 
 /************************ MOTORES ************************/
-// Motores: Pololu 298:1 Micro Motor HPCB 12V 0.8A 100 RPM
-// Utilizamos 4 motores porém eles estão em paralelo
+// Motores: Pololu 30:1 Micro Motor MP 6V
 
 // Motor ESQUERDO DIANETEIRO
-#define MotorEsquerdoFrente 11
-#define MotorEsquerdoTras 10
+#define MotorEsquerdoFrente 6
+#define MotorEsquerdoTras 5
 
 // Motor DIREITO DIANTEIRO
-#define MotorDireitoFrente 5
-#define MotorDireitoTras 6
+#define MotorDireitoFrente 10
+#define MotorDireitoTras 11
 
 
 void ligarMotores() {
@@ -30,14 +29,14 @@ void ligarMotores() {
 }
 
 /************************ SENSORES ************************/
-// Sensores: Pololu QTR-8A reflectance sensor, Sharp 4-30cm, Divisor de Tensão, GY521 IMU
+// Sensores: Pololu QTR-8A reflectance sensor
 // PORTAS ANÁLOGICAS
 
 // SENSORES ARRAY QTR-8-A
-#define luminosidade1     A4 // SENSOR LINHA 1
-#define luminosidade2     A5 // SENSOR LINHA 2
-#define luminosidade3     A2// SENSOR LINHA 3
-#define luminosidade4     A3 // SENSOR LINHA 4
+#define luminosidade1     A5 // SENSOR LINHA 1
+#define luminosidade2     A4 // SENSOR LINHA 2
+#define luminosidade3     A3// SENSOR LINHA 3
+#define luminosidade4     A2 // SENSOR LINHA 4
 #define luminosidade5     A1 // SENSOR LINHA 5
 #define luminosidade6     A0 // SENSOR LINHA 6
 
@@ -60,34 +59,14 @@ int QTR[] = {
 // SETTINGS PARA LER O ARRAY COM A FUNÇÃO .readLine()
 #define NUM_SENSORS             6  // number of sensors used
 #define NUM_SAMPLES_PER_SENSOR  4  // average 4 analog samples per sensor reading
-//#define EMITTER_PIN             2  // emitter is controlled by digital pin 2
 
 // Sensores de 0 a 8 que estão conectados nas portas analógicas
 QTRSensorsAnalog qtra((unsigned char[]) {luminosidade1, luminosidade2, luminosidade3, luminosidade4, luminosidade5, luminosidade6}, 
-  NUM_SENSORS, NUM_SAMPLES_PER_SENSOR/*, EMITTER_PIN*/);
+  NUM_SENSORS, NUM_SAMPLES_PER_SENSOR);
 unsigned int sensorValues[NUM_SENSORS];
 
  
 /************************ INTERFACE ************************/
-// Botões para iniciar ações 
-// PORTAS DIGITAIS
-#define btn1 38 // LED Robô ligado
-#define btn2 36 // LED Tensão bateria
-#define btn3 34 // LED Teste do robô
-#define btn4 32 // LED Calibração
-
-int Botoes[] {
-  0,
-  btn1,
-  btn2,
-  btn3,
-  btn4
-};
-DigitalIn Botao1(btn1);
-DigitalIn Botao2(btn2);
-DigitalIn Botao3(btn3);
-DigitalIn Botao4(btn4);
-
 
 // LEDs para identificação de ações 
 #define led1  7 // LED
@@ -120,26 +99,24 @@ DigitalOut Buzzer(buzzer);
 #define IDDLE   0
 
 /************************ VARIÁVEIS DO ROBÔ ************************/
-unsigned long tempoinicial = millis();
+unsigned long tempoinicial = 0;
+unsigned long int tempopercorrido = 0;
+int tempofinal = 16000;
+
+int erro; int P; int I; int D;
+int ganho;
+double motorB; 
+double motorC;
+
 int lastError = 0;
 
-//float KP = 0.015;
-//float KP = 0.3; // Constante do Proporcional // tchela
-//float KI = 0.03;
-//float KI = 0.001;  //  tchela
-//float KD = 0.4; // Constante da Derivada
-//float KD = 0.2; // Constante da Derivada // tchela
-
-float KP = 0.32;
+float KP = 0.03;
 float KI = 0;
-float KD = 0.4;
+float KD = 0.89;
 
-int branco = 100; // Força normal para seguir linha
-int preto = 700; // Força para rampa
+int forcaPID = 68;
 
-int forcaPID = 25;
-
-int offset = ((branco + preto) / 2); // media seguidor
+int forcaReta = 78;
 
 int setPoint = 2500;
 

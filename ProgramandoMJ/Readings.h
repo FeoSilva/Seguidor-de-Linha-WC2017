@@ -12,11 +12,7 @@ int lerTodosQTR() {
 }
 
 unsigned int lerQTR(int pino) {
-  
-  //qtra.read(sensorValues);
-  return analogRead(QTR[pino]);
-  //return sensorValues[pino-1];
-  
+  return analogRead(QTR[pino]);  
 }
 
 String allsensors;
@@ -51,6 +47,5 @@ void lerTodosSensores() {
 
   Serial.println(allsensors);   
   Serial.println();
-  //delay(250);
 } 
 
