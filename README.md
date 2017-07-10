@@ -13,5 +13,5 @@ Componentes do robô:
 - Bateria Li-Po 2S 7.4 - Turnigy
 
 Agradecimentos: 
-<a href="https://github.com/marcosdeoliveira">Marcos Oliveira</a>
+<a href="https://github.com/marcosdeoliveira">Marcos Oliveira</a><br>
 <a href="https://github.com/joaopedrovbs">João Pedron Vilas Boas</a>
