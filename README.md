@@ -9,6 +9,7 @@ O robô do Seguidor de Linha que participou do Winter Challenge edição 13 em 2
 Componentes do robô:
 - Arduino Nano (Microcontrolador)
 - <a href="https://www.pololu.com/product/960">QTR Array Analógico - Pololu (Sensor para Seguir Linha)</a>
+- <a href="https://www.pololu.com/product/713">TB6612FNG - Pololu (Driver do Motor) </a>
 - <a href="https://www.pololu.com/product/1098">50:1 Micro Metal Gearmotor LP 6V (Motores)</a>
 - Bateria Li-Po 2S 7.4 - Turnigy
 
